@@ -1,13 +1,13 @@
-// src/api.js
 import axios from 'axios';
 
-// HARDCODED TO LOCAL DJANGO PORT 8000
+// src/api.js
+
+
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: 'https://millitary-personnel-system-at-makutupora.onrender.com/api',
 });
+
+
 
 // Attach Django JWT Token
 api.interceptors.request.use(

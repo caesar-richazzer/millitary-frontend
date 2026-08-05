@@ -15,6 +15,20 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
     p_service_number: '', first_name: '', last_name: '', rank: 'Kanali (Colonel)', password: '', confirmPassword: ''
   });
 
+  const extractErrorMessage = (err, defaultMsg) => {
+    if (err.response?.data) {
+      const data = err.response.data;
+      if (typeof data === 'string') return data;
+      if (data.detail) return data.detail;
+      if (data.non_field_errors) return data.non_field_errors.join(' ');
+      const firstKey = Object.keys(data)[0];
+      if (firstKey && Array.isArray(data[firstKey])) {
+        return `${firstKey.toUpperCase()}: ${data[firstKey][0]}`;
+      }
+    }
+    return defaultMsg;
+  };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -28,7 +42,6 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       const pNumUpper = loginData.p_service_number.trim().toUpperCase();
 
       const response = await api.post('/auth/login/', {
-        username: pNumUpper, // Required by Django SimpleJWT
         p_service_number: pNumUpper,
         password: loginData.password
       });
@@ -48,7 +61,7 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       });
     } catch (err) {
       console.error('Django Auth Error:', err.response?.data || err);
-      setErrorMessage('NAMBA YA JESHI AU NENO LA SIRI SIO SAHIHI!');
+      setErrorMessage(extractErrorMessage(err, 'NAMBA YA JESHI AU NENO LA SIRI SIO SAHIHI!'));
     } finally {
       setLoading(false);
     }
@@ -76,12 +89,12 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
         password: signupData.password
       });
 
-      alert('ADMIN USER REGISTERED IN DJANGO! NOW LOGIN.');
       setAuthMode('LOGIN');
-      setLoginData({ ...loginData, p_service_number: signupData.p_service_number.toUpperCase(), password: '' });
+      setLoginData({ p_service_number: signupData.p_service_number.toUpperCase(), password: '' });
+      setErrorMessage('');
     } catch (err) {
       console.error('Django Register Error:', err.response?.data || err);
-      setErrorMessage('KOSA KATIKA KUSAJILI ADMIN KWENYE DJANGO!');
+      setErrorMessage(extractErrorMessage(err, 'KOSA KATIKA KUSAJILI ADMIN KWENYE DJANGO!'));
     } finally {
       setLoading(false);
     }
@@ -89,7 +102,6 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
 
   return (
     <div className="min-h-screen flex flex-col justify-between p-6 select-none relative overflow-hidden font-sans">
-      
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-emerald-500/15 rounded-full filter blur-[120px] pointer-events-none animate-smoke"></div>
 
       <div className="max-w-2xl mx-auto w-full text-center relative z-10">
@@ -113,14 +125,14 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
           <div className="flex p-1 bg-slate-900/80 rounded-2xl mb-6 border border-emerald-500/20">
             <button
               type="button"
-              onClick={() => setAuthMode('LOGIN')}
+              onClick={() => { setAuthMode('LOGIN'); setErrorMessage(''); }}
               className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${authMode === 'LOGIN' ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/20' : 'text-slate-400 hover:text-white'}`}
             >
               <i className="bi bi-key-fill"></i> Admin Login
             </button>
             <button
               type="button"
-              onClick={() => setAuthMode('SIGNUP')}
+              onClick={() => { setAuthMode('SIGNUP'); setErrorMessage(''); }}
               className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${authMode === 'SIGNUP' ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/20' : 'text-slate-400 hover:text-white'}`}
             >
               <i className="bi bi-person-plus-fill"></i> Register Admin
@@ -293,7 +305,6 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       <footer className="text-center text-xs text-slate-500 font-medium relative z-10">
         Tanzania Peoples' Defence Force <span className="mx-1.5">•</span> 834 KJ Makutupora JKT
       </footer>
-
     </div>
   );
 }
