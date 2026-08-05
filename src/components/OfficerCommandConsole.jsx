@@ -136,8 +136,8 @@ export default function OfficerCommandConsole({ session, onLogout }) {
               <i className="bi bi-shield-shaded"></i>
             </div>
             <div>
-              <h1 className="text-base font-bold text-white tracking-tight leading-none">JKT C4ISR</h1>
-              <p className="text-[11px] text-emerald-400 font-medium mt-1">Makutupora Dodoma</p>
+              <h1 className="text-base font-bold text-white tracking-tight leading-none">834 KJ MAKUTUPORA JKT</h1>
+              <p className="text-[11px] text-emerald-400 font-medium mt-1">Makutupora jkt Dodoma</p>
             </div>
           </div>
 
@@ -150,12 +150,12 @@ export default function OfficerCommandConsole({ session, onLogout }) {
             >
               <option value="ALL" className="bg-slate-900">All Departments (Tawi)</option>
               <option value="834KJ-BHQ" className="bg-slate-900">834KJ-BHQ</option>
-              <option value="8934KJ-ADMINI" className="bg-slate-900">8934KJ-ADMINI</option>
-              <option value="IO" className="bg-slate-900">IO</option>
-              <option value="QM-tawi la siliha" className="bg-slate-900">QM-tawi la siliha</option>
+              <option value="834KJ-ADMINI" className="bg-slate-900">834KJ-ADMINI</option>
+              <option value="834KJ-IO" className="bg-slate-900">834KJ-IO</option>
+              <option value="834KJ-QM-tawi la siliha" className="bg-slate-900">834KJ-QM-tawi la siliha</option>
               <option value="834KJ-ZAHANATI" className="bg-slate-900">834KJ-ZAHANATI</option>
-              <option value="UDM" className="bg-slate-900">UDM</option>
-              <option value="RADIO OPERATOR" className="bg-slate-900">RADIO OPERATOR</option>
+              <option value="834KJ-UDM" className="bg-slate-900">834KJ-UDM</option>
+              <option value="834KJ-RADIO OPERATOR" className="bg-slate-900">834KJ-RADIO OPERATOR</option>
               <option value="834KJ-mafunzo" className="bg-slate-900">834KJ-mafunzo</option>
               <option value="834KJ-O/MESS & INSTIUTES" className="bg-slate-900">834KJ-O/MESS & INSTIUTES</option>
               <option value="834KJ-VETA" className="bg-slate-900">834KJ-VETA</option>
@@ -194,7 +194,7 @@ export default function OfficerCommandConsole({ session, onLogout }) {
                   <div className="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-base shadow">
                     <i className="bi bi-shield-shaded"></i>
                   </div>
-                  <span className="font-bold text-white text-sm">JKT C4ISR</span>
+                  <span className="font-bold text-white text-sm">JKT MAKUTUPORA</span>
                 </div>
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
