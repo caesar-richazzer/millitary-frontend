@@ -1,16 +1,15 @@
 // src/api.js
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
-
+// HARDCODED TO LOCAL DJANGO PORT 8000
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: 'http://127.0.0.1:8000/api/',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Interceptor to attach Django JWT Token
+// Attach Django JWT Token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access_token');

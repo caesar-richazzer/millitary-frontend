@@ -15,7 +15,6 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
     p_service_number: '', first_name: '', last_name: '', rank: 'Kanali (Colonel)', password: '', confirmPassword: ''
   });
 
-  // LOGIN HANDLER (SENDS BOTH USERNAME AND P_SERVICE_NUMBER TO DJANGO)
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -29,7 +28,7 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       const pNumUpper = loginData.p_service_number.trim().toUpperCase();
 
       const response = await api.post('/auth/login/', {
-        username: pNumUpper,            # Required by Django SimpleJWT
+        username: pNumUpper, // Required by Django SimpleJWT
         p_service_number: pNumUpper,
         password: loginData.password
       });
@@ -47,20 +46,14 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
         department: userDetail.department || '834KJ-BHQ',
         entry_time: new Date().toLocaleTimeString('en-US', { timeZone: 'Africa/Dar_es_Salaam' })
       });
-
     } catch (err) {
       console.error('Django Auth Error:', err.response?.data || err);
-      if (err.response && (err.response.status === 401 || err.response.status === 400)) {
-        setErrorMessage('NAMBA YA JESHI AU NENO LA SIRI SIO SAHIHI!');
-      } else {
-        setErrorMessage('HAWEZI KUPATA DJANGO SERVER! HAKIKISHA RUNSERVER INAFANYA KAZI.');
-      }
-    } font-bold {
+      setErrorMessage('NAMBA YA JESHI AU NENO LA SIRI SIO SAHIHI!');
+    } finally {
       setLoading(false);
     }
   };
 
-  // REGISTER ADMIN IN DJANGO
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
@@ -86,7 +79,6 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       alert('ADMIN USER REGISTERED IN DJANGO! NOW LOGIN.');
       setAuthMode('LOGIN');
       setLoginData({ ...loginData, p_service_number: signupData.p_service_number.toUpperCase(), password: '' });
-
     } catch (err) {
       console.error('Django Register Error:', err.response?.data || err);
       setErrorMessage('KOSA KATIKA KUSAJILI ADMIN KWENYE DJANGO!');
@@ -96,7 +88,7 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-6 select-none relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-between p-6 select-none relative overflow-hidden font-sans">
       
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-emerald-500/15 rounded-full filter blur-[120px] pointer-events-none animate-smoke"></div>
 

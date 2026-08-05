@@ -3,7 +3,7 @@ import api from '../api';
 import EditOfficerModal from './EditOfficerModal.jsx';
 import PrintableOfficerDossier from './PrintableOfficerDossier.jsx';
 import AdminSettingsModal from './AdminSettingsModal.jsx';
-import SecurityWatermark from './SecurityWatermark.jsx'; // IMPORTED HERE
+import SecurityWatermark from './SecurityWatermark.jsx';
 
 import DashboardView from './views/DashboardView.jsx';
 import UserAccessView from './views/UserAccessView.jsx';
@@ -40,6 +40,7 @@ export default function OfficerCommandConsole({ session, onLogout }) {
   const [selectedDept, setSelectedDept] = useState('ALL');
   const [codeRed, setCodeRed] = useState(false);
   const [showAdminSettings, setShowAdminSettings] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Mobile Menu Toggle
 
   const [officers, setOfficers] = useState([]);
   const [selectedOfficer, setSelectedOfficer] = useState(null);
@@ -108,20 +109,28 @@ export default function OfficerCommandConsole({ session, onLogout }) {
     (o.infractions || []).map(inf => ({ ...inf, officer_p_number: o.p_service_number, officer_name: `${o.rank} ${o.first_name} ${o.last_name}` }))
   );
 
+  const navItems = [
+    { id: 'DASHBOARD', label: 'Dashboard', icon: 'bi-speedometer2' },
+    { id: 'USER_ACCESS', label: 'User & Access', icon: 'bi-people-fill' },
+    { id: 'OFFICERS', label: 'Officers (Col - 2Lt)', icon: 'bi-person-badge-fill' },
+    { id: 'NON_OFFICERS', label: 'Non-Officers (WO1 - Pte)', icon: 'bi-person-vcard-fill' },
+    { id: 'ATTENDANCE', label: 'Attendance & Duty', icon: 'bi-calendar-check-fill' },
+    { id: 'DISCIPLINE', label: 'Disciplinary Logs', icon: 'bi-clipboard-data-fill' },
+    { id: 'AUDIT', label: 'Audit History', icon: 'bi-shield-check' },
+  ];
+
   return (
-    <div className={`min-h-screen ${codeRed ? 'bg-rose-950 text-rose-100' : ''} flex select-none relative overflow-hidden font-sans`}>
+    <div className={`min-h-screen ${codeRed ? 'bg-rose-950 text-rose-100' : ''} flex select-none relative overflow-x-hidden font-sans`}>
       
-      {/* SECURITY WATERMARK INSIDE RETURN BLOCK */}
+      {/* SECURITY WATERMARK */}
       <SecurityWatermark session={session} />
 
       {/* AMBIENT GREEN SMOKE GLOW */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full filter blur-[120px] pointer-events-none animate-smoke"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full filter blur-[120px] pointer-events-none animate-smoke"></div>
+      <div className="absolute top-0 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-emerald-500/10 rounded-full filter blur-[100px] pointer-events-none animate-smoke"></div>
 
-      {/* 1. LEFT SIDEBAR */}
-      <aside className="w-64 bg-[#0F1521]/90 backdrop-blur-xl border-r border-emerald-500/20 p-5 flex flex-col justify-between shrink-0 hidden md:flex z-10">
+      {/* 1. DESKTOP SIDEBAR */}
+      <aside className="w-64 bg-[#0F1521]/90 backdrop-blur-xl border-r border-emerald-500/20 p-5 flex flex-col justify-between shrink-0 hidden md:flex z-20">
         <div className="space-y-6">
-          
           <div className="flex items-center gap-3 px-2">
             <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-xl shadow-lg shadow-emerald-500/30">
               <i className="bi bi-shield-shaded"></i>
@@ -154,15 +163,7 @@ export default function OfficerCommandConsole({ session, onLogout }) {
           </div>
 
           <nav className="space-y-1.5">
-            {[
-              { id: 'DASHBOARD', label: 'Dashboard', icon: 'bi-speedometer2' },
-              { id: 'USER_ACCESS', label: 'User & Access', icon: 'bi-people-fill' },
-              { id: 'OFFICERS', label: 'Military Officers (Col - 2Lt)', icon: 'bi-person-badge-fill' },
-              { id: 'NON_OFFICERS', label: 'Non-Officers (WO1 - Pte)', icon: 'bi-person-vcard-fill' },
-              { id: 'ATTENDANCE', label: 'Attendance & Duty', icon: 'bi-calendar-check-fill' },
-              { id: 'DISCIPLINE', label: 'Disciplinary Logs', icon: 'bi-clipboard-data-fill' },
-              { id: 'AUDIT', label: 'Audit History', icon: 'bi-shield-check' },
-            ].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
@@ -180,71 +181,122 @@ export default function OfficerCommandConsole({ session, onLogout }) {
               </button>
             ))}
           </nav>
-
         </div>
       </aside>
 
+      {/* MOBILE DRAWER OVERLAY SIDEBAR */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[9999] md:hidden flex">
+          <div className="w-72 bg-[#0F1521] border-r border-emerald-500/30 p-5 flex flex-col justify-between h-full space-y-6 overflow-y-auto">
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-base shadow">
+                    <i className="bi bi-shield-shaded"></i>
+                  </div>
+                  <span className="font-bold text-white text-sm">JKT C4ISR</span>
+                </div>
+                <button 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center"
+                >
+                  <i className="bi bi-x-lg"></i>
+                </button>
+              </div>
+
+              <nav className="space-y-2">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveNav(item.id);
+                      setSearchTerm('');
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold ${
+                      activeNav === item.id 
+                        ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg' 
+                        : 'text-slate-300 bg-slate-900/60'
+                    }`}
+                  >
+                    <i className={`bi ${item.icon}`}></i>
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </div>
+          <div className="flex-1" onClick={() => setMobileMenuOpen(false)}></div>
+        </div>
+      )}
+
       {/* 2. MAIN CONTENT AREA */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-y-auto z-10">
+      <main className="flex-1 flex flex-col min-w-0 overflow-y-auto z-10 w-full">
         
-        {/* TOP HEADER */}
-        <header className="bg-[#0F1521]/80 backdrop-blur-xl border-b border-emerald-500/20 px-8 py-4 flex justify-between items-center sticky top-0 z-20">
-          <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
-              {activeNav === 'DASHBOARD' && 'System Analytics & C4ISR Overview'}
-              {activeNav === 'USER_ACCESS' && 'System Administrators & Access Management'}
-              {activeNav === 'OFFICERS' && 'Commissioned Military Officers (Colonel to 2nd Lt)'}
-              {activeNav === 'NON_OFFICERS' && 'Non-Commissioned Staff & Enlisted (WO1 to Private)'}
-              {activeNav === 'ATTENDANCE' && 'Attendance & Duty Roster Management'}
-              {activeNav === 'DISCIPLINE' && 'Battalion Disciplinary Incident Logs'}
-              {activeNav === 'AUDIT' && 'System Security & Audit History'}
-            </h1>
-            <div className="flex items-center gap-2 text-xs text-slate-400 font-medium mt-0.5">
-              <span>834 KJ Makutupora JKT</span>
-              <span>/</span>
-              <span className="text-emerald-400 font-semibold">{activeNav}</span>
+        {/* RESPONSIVE TOP HEADER */}
+        <header className="bg-[#0F1521]/80 backdrop-blur-xl border-b border-emerald-500/20 px-4 sm:px-8 py-3.5 flex justify-between items-center sticky top-0 z-20">
+          
+          <div className="flex items-center gap-3">
+            {/* MOBILE HAMBURGER BUTTON */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden p-2 rounded-xl bg-slate-900 border border-emerald-500/30 text-emerald-400 text-base"
+            >
+              <i className="bi bi-list"></i>
+            </button>
+
+            <div>
+              <h1 className="text-sm sm:text-xl font-bold text-white tracking-tight truncate max-w-[180px] sm:max-w-none">
+                {activeNav === 'DASHBOARD' && 'Dashboard Overview'}
+                {activeNav === 'USER_ACCESS' && 'System Administrators'}
+                {activeNav === 'OFFICERS' && 'Military Officers'}
+                {activeNav === 'NON_OFFICERS' && 'Non-Officers & Staff'}
+                {activeNav === 'ATTENDANCE' && 'Attendance & Duty'}
+                {activeNav === 'DISCIPLINE' && 'Disciplinary Logs'}
+                {activeNav === 'AUDIT' && 'Audit History'}
+              </h1>
+              <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400 font-medium mt-0.5">
+                <span>834 KJ Makutupora JKT</span>
+                <span>/</span>
+                <span className="text-emerald-400 font-semibold">{activeNav}</span>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => {
                 setSelectedOfficerEdit(null);
                 setIsAddingNew(true);
               }}
-              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold px-5 py-2.5 rounded-full shadow-lg shadow-emerald-500/30 transition-all cursor-pointer flex items-center gap-2 hover:scale-105"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-[11px] sm:text-xs font-bold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-lg shadow-emerald-500/30 transition-all cursor-pointer flex items-center gap-1.5"
             >
-              <i className="bi bi-person-plus-fill text-sm"></i>
-              <span>Register Personnel</span>
+              <i className="bi bi-person-plus-fill"></i>
+              <span className="hidden sm:inline">Register Personnel</span>
             </button>
 
             <button
               onClick={handleLockdownToggle}
-              className="bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-bold px-3 py-2 rounded-full hover:bg-rose-500/20 cursor-pointer flex items-center gap-1.5"
+              className="bg-rose-500/10 border border-rose-500/30 text-rose-400 text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-2 rounded-full hover:bg-rose-500/20 cursor-pointer flex items-center gap-1"
             >
-              <i className="bi bi-exclamation-octagon-fill"></i> {codeRed ? 'Cancel Lockdown' : 'Lockdown'}
+              <i className="bi bi-exclamation-octagon-fill"></i>
+              <span className="hidden sm:inline">{codeRed ? 'Cancel' : 'Lockdown'}</span>
             </button>
-
-            <div className="h-8 w-px bg-slate-800 mx-1"></div>
 
             <button 
               onClick={() => setShowAdminSettings(true)}
-              className="flex items-center gap-3 p-1.5 rounded-full bg-slate-900/80 border border-emerald-500/20 hover:border-emerald-500/50 transition-all cursor-pointer"
+              className="flex items-center gap-2 p-1 rounded-full bg-slate-900/80 border border-emerald-500/20 hover:border-emerald-500/50 cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-sm shadow">
+              <div className="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-xs shadow">
                 <i className="bi bi-person-fill"></i>
-              </div>
-              <div className="text-left hidden sm:block pr-3">
-                <div className="text-xs font-bold text-white">{session?.first_name || 'caesar richazzer'}</div>
-                <div className="text-[10px] text-emerald-400 font-medium">{session?.rank || 'Kanali (Colonel)'} • {session?.p_service_number || 'P-12345'}</div>
               </div>
             </button>
           </div>
         </header>
 
         {/* DYNAMIC VIEW ACTIVATION */}
-        <div className="p-8 space-y-6 max-w-6xl w-full mx-auto">
+        <div className="p-4 sm:p-8 space-y-6 max-w-6xl w-full mx-auto">
           {activeNav === 'DASHBOARD' && <DashboardView safeOfficers={safeOfficers} />}
           
           {activeNav === 'USER_ACCESS' && <UserAccessView session={session} />}
