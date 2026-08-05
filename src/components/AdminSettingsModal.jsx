@@ -56,7 +56,7 @@ export default function AdminSettingsModal({ session, onClose, onLogout }) {
               activeTab === 'AUTHORIZATION' ? 'bg-emerald-500 text-slate-950 font-bold shadow-md' : 'text-slate-400 hover:text-white'
             }`}
           >
-            <i className="bi bi-shield-lock-fill"></i> C4ISR Authorizations
+            <i className="bi bi-shield-lock-fill"></i> 834 KJ MAKUTUPORA JKT Authorizations
           </button>
         </div>
 
@@ -89,7 +89,7 @@ export default function AdminSettingsModal({ session, onClose, onLogout }) {
             <div className="space-y-3 text-slate-300 font-medium leading-relaxed bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/20">
               <h3 className="font-bold text-white text-sm">TPDF Military System Non-Disclosure Agreement (NDA)</h3>
               <p>
-                By logging into the 834 KJ Makutupora JKT C4ISR System, you agree to comply with the National Service Act No. 16 of 1964 and TPDF Security Regulations.
+                By logging into the 834 KJ Makutupora JKT System, you agree to comply with the National Service Act No. 16 of 1964 and TPDF Security Regulations.
               </p>
             </div>
           )}
