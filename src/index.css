@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    background: #0B0F17;
+    color: #E2E8F0;
+    font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(at 10% 10%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+      radial-gradient(at 90% 90%, rgba(5, 150, 105, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 70%);
+    background-attachment: fixed;
+  }
+}
+
+/* Gemini Floating Capsule Effect */
+.gemini-capsule {
+  background: rgba(18, 24, 38, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.gemini-capsule:hover {
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 35px -2px rgba(16, 185, 129, 0.45);
+}
+
+/* Frosted Dark Glass Cards */
+.gemini-card {
+  background: rgba(15, 21, 33, 0.82);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+.gemini-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Green Smoke Pulse Animation */
+@keyframes emeraldSmoke {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.06); }
+}
+
+.animate-smoke {
+  animation: emeraldSmoke 5s infinite ease-in-out;
+}
+
+/* GEMINI LIVE VOICE MODE SIDE SMOKE ANIMATIONS */
+@keyframes geminiSmokeLeft {
+  0%, 100% {
+    transform: translateY(-25%) scale(1) rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(25%) scale(1.3) rotate(180deg);
+    opacity: 0.75;
+  }
+}
+
+@keyframes geminiSmokeRight {
+  0%, 100% {
+    transform: translateY(25%) scale(1.1) rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-25%) scale(1.35) rotate(-180deg);
+    opacity: 0.8;
+  }
+}
+
+.animate-gemini-smoke-left {
+  animation: geminiSmokeLeft 6s infinite ease-in-out;
+}
+
+.animate-gemini-smoke-right {
+  animation: geminiSmokeRight 7s infinite ease-in-out;
+}
