@@ -18,14 +18,14 @@ export default function PrintableOfficerDossier({ officer, onClose }) {
             onClick={() => window.print()}
             className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-2xl shadow-md shadow-blue-500/20 flex items-center gap-2"
           >
-            <i className="bi bi-printer-fill"></i> Print Officer Dossier
+            <i className="bi bi-printer-fill"></i> Print Officer 
           </button>
         </div>
 
         <div className="text-center border-b pb-4 mb-6">
           <div className="text-xs font-bold text-slate-500 tracking-widest uppercase">JESHI LA KUJENGA TAIFA (JKT)</div>
           <h1 className="text-xl font-bold text-slate-800 uppercase tracking-tight">834 KIKOSI CHA MAKUTUPORA JKT - DODOMA</h1>
-          <h2 className="text-sm font-semibold text-blue-600 uppercase mt-0.5">Official Officer Dossier Record</h2>
+          <h2 className="text-sm font-semibold text-blue-600 uppercase mt-0.5">Official Officer Dossier </h2>
         </div>
 
         <div className="flex justify-between items-start mb-6 border-b pb-4">
