@@ -68,7 +68,7 @@ export default function AdminSettingsModal({ session, onClose, onLogout }) {
               <div className="bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/20 space-y-3">
                 <h3 className="font-bold text-white">System Preferences</h3>
                 <div className="flex justify-between items-center py-2 border-b border-emerald-500/10">
-                  <span>Django REST API Connection</span>
+                  <span>Wait For Connection</span>
                   <span className="font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">
                     <i className="bi bi-check-circle-fill"></i> Connected
                   </span>
