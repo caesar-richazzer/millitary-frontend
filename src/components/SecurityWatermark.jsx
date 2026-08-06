@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function SecurityWatermark({ session }) {
   const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Africa/Dar_es_Salaam' });
-  const watermarkText = `CLASSIFIED • 834-KJ C4ISR • ${session?.p_service_number || 'ADMIN'} • ${timestamp}`;
+  const watermarkText = `CLASSIFIED • 834KJ MAKUTUPORA JKT• ${session?.p_service_number || 'ADMIN'} • ${timestamp}`;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[999999] overflow-hidden opacity-[0.03] select-none flex flex-wrap justify-between items-center p-4 gap-12 font-mono text-xs font-black text-[#10B981] rotate-[-15deg]">
