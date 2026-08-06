@@ -9,7 +9,7 @@ export default function DashboardView({ safeOfficers }) {
           <div className="text-xs font-bold text-slate-400 mb-1">Total Employed Officers</div>
           <div className="text-3xl font-black text-white">{safeOfficers.length}</div>
           <div className="text-[11px] text-emerald-400 font-medium mt-2 flex items-center gap-1">
-            <i className="bi bi-shield-check"></i> Registered in Django DB
+            <i className="bi bi-shield-check"></i> Registered 
           </div>
         </div>
 
