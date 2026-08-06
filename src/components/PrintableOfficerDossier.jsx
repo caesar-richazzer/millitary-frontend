@@ -24,7 +24,7 @@ export default function PrintableOfficerDossier({ officer, onClose }) {
 
         <div className="text-center border-b pb-4 mb-6">
           <div className="text-xs font-bold text-slate-500 tracking-widest uppercase">JESHI LA KUJENGA TAIFA (JKT)</div>
-          <h1 className="text-xl font-bold text-slate-800 uppercase tracking-tight">834 KIKOSI CHA MAKUTUPORA JKT - DODOMA</h1>
+          <h1 className="text-xl font-bold text-slate-800 uppercase tracking-tight">834 KJ MAKUTUPORA JKT - DODOMA</h1>
           <h2 className="text-sm font-semibold text-blue-600 uppercase mt-0.5">Official Officer Dossier </h2>
         </div>
 
