@@ -194,7 +194,7 @@ export default function OfficerCommandConsole({ session, onLogout }) {
                   <div className="w-8 h-8 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center font-black text-base shadow">
                     <i className="bi bi-shield-shaded"></i>
                   </div>
-                  <span className="font-bold text-white text-sm">JKT MAKUTUPORA</span>
+                  <span className="font-bold text-white text-sm"> MAKUTUPORA JKT</span>
                 </div>
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
