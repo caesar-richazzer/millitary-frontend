@@ -94,7 +94,7 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
       setErrorMessage('');
     } catch (err) {
       console.error('Django Register Error:', err.response?.data || err);
-      setErrorMessage(extractErrorMessage(err, 'KOSA KATIKA KUSAJILI ADMIN KWENYE DJANGO!'));
+      setErrorMessage(extractErrorMessage(err, 'KOSA KATIKA KUSAJILI ADMIN '));
     } finally {
       setLoading(false);
     }
@@ -248,11 +248,11 @@ export default function MilitaryAuthPage({ onAuthSuccess }) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Passcode</label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Password</label>
                   <div className="relative">
                     <input
                       type={showSignupPassword ? "text" : "password"}
-                      placeholder="Passcode"
+                      placeholder="PassWORD"
                       value={signupData.password}
                       onChange={(e) => setSignupData({...signupData, password: e.target.value})}
                       className="w-full bg-slate-900/90 border border-emerald-500/30 p-2.5 pr-8 text-white font-semibold rounded-2xl text-xs"
