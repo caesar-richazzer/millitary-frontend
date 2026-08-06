@@ -5,7 +5,7 @@ export default function AuditHistoryView({ session }) {
     <div className="space-y-6">
       <div className="gemini-card p-6 rounded-3xl space-y-4">
         <h2 className="text-base font-bold text-white flex items-center gap-2">
-          <i className="bi bi-shield-check text-emerald-400"></i> C4ISR System Security Audit Trail
+          <i className="bi bi-shield-check text-emerald-400"></i> 834KJ MAKUTUPORA JKT System Security Audit Trail
         </h2>
 
         <div className="overflow-x-auto">
