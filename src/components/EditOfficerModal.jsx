@@ -251,7 +251,7 @@ export default function EditOfficerModal({ officer, onClose, onSave, onAddInfrac
                     className="w-full bg-slate-900/90 border border-emerald-500/30 p-2.5 text-white font-semibold rounded-2xl focus:outline-none focus:border-emerald-400" required
                   >
                     <option value="834KJ-BHQ" className="bg-slate-900">834KJ-BHQ</option>
-                    <option value="8934KJ-ADMINI" className="bg-slate-900">8934KJ-ADMINI</option>
+                    <option value="834KJ-ADMINI" className="bg-slate-900">834KJ-ADMINI</option>
                     <option value="834KJ-IO" className="bg-slate-900">834KJ-IO</option>
                     <option value="834KJ-QM-tawi la siliha" className="bg-slate-900">834KJ-QM-tawi la siliha</option>
                     <option value="834KJ-ZAHANATI" className="bg-slate-900">834KJ-ZAHANATI</option>
