@@ -252,11 +252,11 @@ export default function EditOfficerModal({ officer, onClose, onSave, onAddInfrac
                   >
                     <option value="834KJ-BHQ" className="bg-slate-900">834KJ-BHQ</option>
                     <option value="8934KJ-ADMINI" className="bg-slate-900">8934KJ-ADMINI</option>
-                    <option value="IO" className="bg-slate-900">IO</option>
-                    <option value="QM-tawi la siliha" className="bg-slate-900">QM-tawi la siliha</option>
+                    <option value="834KJ-IO" className="bg-slate-900">834KJ-IO</option>
+                    <option value="834KJ-QM-tawi la siliha" className="bg-slate-900">834KJ-QM-tawi la siliha</option>
                     <option value="834KJ-ZAHANATI" className="bg-slate-900">834KJ-ZAHANATI</option>
-                    <option value="UDM" className="bg-slate-900">UDM</option>
-                    <option value="RADIO OPERATOR" className="bg-slate-900">RADIO OPERATOR</option>
+                    <option value="834KJ-UDM" className="bg-slate-900">834KJ-UDM</option>
+                    <option value="834KJ-RADIO OPERATOR" className="bg-slate-900">834KJ-RADIO OPERATOR</option>
                     <option value="834KJ-mafunzo" className="bg-slate-900">834KJ-mafunzo</option>
                     <option value="834KJ-O/MESS & INSTIUTES" className="bg-slate-900">834KJ-O/MESS & INSTIUTES</option>
                     <option value="834KJ-VETA" className="bg-slate-900">834KJ-VETA</option>
